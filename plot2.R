@@ -1,6 +1,4 @@
-library(lubridate)
-
-data <- read.table('household_power_consumption.txt', header=T, sep=";")
+data <- read.table('household_power_consumption.txt', header=T, sep=";" , , na.strings = "?")
 data$Date <- as.Date(data$Date, format="%d/%m/%Y")
 Sub_month_year <- data[which(month(data$Date) == 2 & year(data$Date) == 2007) ,] #Subset for year and month
 
@@ -17,6 +15,6 @@ Date_Time <- strptime(Date_Time, format = "%Y-%m-%d %H:%M:%S")
 Date_Time <- as.data.frame(Date_Time)
 Sub_final <- cbind(Sub_final,Date_Time)
 
-png(file = "./Project_1/plot2.png") #Open PNG device. Create Plot1 in my working directory
+png(file = "plot2.png") #Open PNG device. Create Plot1 in my working directory
 with(Sub_final, plot (Global_active_power ~ Date_Time, type="l", ylab = "Global Active Power (kilowatts)", xlab = ""))
 dev.off()
